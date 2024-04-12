@@ -1,7 +1,7 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
-<t:home_layout title="Shop">
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<t:root_layout title="Shop">
   <jsp:body>
     <!-- breadcrumb-section -->
     <div class="breadcrumb-section breadcrumb-bg">
@@ -18,9 +18,8 @@
     </div>
     <!-- end breadcrumb section -->
 
-    <!-- error -->
-
-    <jsp:useBean id="error" scope="request" type="java.lang.String"/>
+    <%-- Error--%>
+    <%--@elvariable id="error" type="java.lang.String" --%>
     <c:if test="${not empty error}">
       <div class="alert alert-danger">
           ${error}
@@ -36,11 +35,11 @@
             <div class="product-filters">
               <ul>
                 <li
-                    class="${param.categoryId == null ? 'active' : ''} test">
+                    class="${param.categoryId == null ? 'active' : ''}">
                   <a
                       href="${pageContext.request.contextPath}/shop">All</a>
                 </li>
-                <jsp:useBean id="categories" scope="request" type="java.util.List"/>
+                  <%--@elvariable id="categories" type="java.util.List<com.example.fruitka.entity.Category>"--%>
                 <c:forEach
                     items="${categories}"
                     var="category">
@@ -58,7 +57,7 @@
         </div>
 
         <div class="row product-lists">
-          <jsp:useBean id="products" scope="request" type="java.util.List"/>
+            <%--@elvariable id="products" type="java.util.List<com.example.fruitka.entity.Product>"--%>
           <c:forEach
               items="${products}"
               var="product">
@@ -67,14 +66,34 @@
                 <div class="product-image">
                   <a href="${pageContext.request.contextPath}/shop/${product.id}"><img
                       src="${product.image}"
-                      alt=""></a>
+                      alt="${product.name}"></a>
                 </div>
                 <h3>${product.name}</h3>
                 <p class="product-price">
                   <span>Per Kg</span> ${product.salePrice}$ </p>
-                <a
-                    href="${pageContext.request.contextPath}/cart?productId=${product.id}&action=add"
-                    class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                <c:choose>
+                  <c:when test="${product.quantity eq 0}">
+                    <p class="product-status">Out of Stock</p>
+                  </c:when>
+                  <c:otherwise>
+                    <p class="product-status">In Stock</p>
+                  </c:otherwise>
+                </c:choose>
+
+                <c:choose>
+                  <c:when test="${sessionScope.user != null}">
+                    <a
+                        data-product_id="${product.id}"
+                        data-quantity="1"
+                        data-action="add"
+                        class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                  </c:when>
+                  <c:otherwise>
+                    <a
+                        href="${pageContext.request.contextPath}/login"
+                        class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                  </c:otherwise>
+                </c:choose>
               </div>
             </div>
           </c:forEach>
@@ -138,6 +157,5 @@
     <!-- end logo carousel -->
 
 
-
   </jsp:body>
-</t:home_layout>
+</t:root_layout>

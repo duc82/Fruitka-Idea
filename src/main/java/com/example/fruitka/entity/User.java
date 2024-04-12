@@ -1,6 +1,7 @@
 package com.example.fruitka.entity;
 
 import com.example.fruitka.enums.Role;
+import java.sql.Date;
 
 public class User {
     private int id;
@@ -9,8 +10,9 @@ public class User {
     private String password;
     private String phone;
     private Role role;
+    private Date createdAt;
 
-    public User(int id, String name, String email, String password, String phone, Role role) {
+    public User(int id, String name, String email, String password, String phone, Role role, Date createdAt) {
         super();
         this.id = id;
         this.name = name;
@@ -18,6 +20,7 @@ public class User {
         this.password = password;
         this.phone = phone;
         this.role = role;
+        this.createdAt = createdAt;
     }
 
     public User() {
@@ -71,5 +74,14 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
 
 }

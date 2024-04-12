@@ -8,8 +8,9 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/login", "/signup"})
-public class AuthFilter implements Filter {
+@WebFilter(urlPatterns = {"/account/*","/cart"})
+public class ProtectedFilter implements Filter {
+
     public void init(FilterConfig config) throws ServletException {
     }
 
@@ -23,8 +24,8 @@ public class AuthFilter implements Filter {
 
         HttpSession session = req.getSession();
 
-        if (session.getAttribute("user") != null) {
-            res.sendRedirect(req.getContextPath() + "/account");
+        if (session.getAttribute("user") == null) {
+            res.sendRedirect(req.getContextPath() + "/login");
             return;
         }
         chain.doFilter(request, response);

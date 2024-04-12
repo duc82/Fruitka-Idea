@@ -8,7 +8,7 @@
         Log In
       </h2>
 
-      <jsp:useBean id="error" scope="request" type="java.lang.String"/>
+        <%--@elvariable id="error" type="java.lang.String"--%>
       <c:if test="${not empty error}">
         <div
             class="alert alert-danger"
@@ -58,7 +58,7 @@
 
       <div class="mt-3">
         Don't have an account?
-        <a href="${pageContext.request.contextPath}/sign-up">Sign up and get started!</a>
+        <a href="${pageContext.request.contextPath}/signup">Sign up and get started!</a>
       </div>
 
     </div>

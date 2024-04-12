@@ -7,13 +7,13 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-@WebServlet(name = "account", value = "/account")
-public class AccountServlet extends HttpServlet {
-    private static final Logger logger = Logger.getLogger(AccountServlet.class.getName());
+@WebServlet(name = "news", value = "/news")
+public class NewsServlet extends HttpServlet {
+    private static final Logger logger = Logger.getLogger(NewsServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/account.jsp").forward(request, response);
+        request.getRequestDispatcher("/news.jsp").forward(request, response);
     }
 
     @Override

@@ -1,20 +1,19 @@
 package com.example.fruitka.entity;
-
 import java.sql.Date;
 
 public class Product {
     private int id;
     private String name;
     private String slug;
-    private double price;
-    private double salePrice;
+    private int price;
+    private int salePrice;
     private int quantity;
     private String description;
     private String image;
     private Category category;
     private Date createdAt;
 
-    public Product(int id, String name, String slug, double price, double salePrice, int quantity, String description,
+    public Product(int id, String name, String slug, int price, int salePrice, int quantity, String description,
                    String image, Category category, Date createdAt) {
         super();
         this.id = id;
@@ -57,19 +56,19 @@ public class Product {
         this.slug = slug;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public double getSalePrice() {
+    public int getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(double salePrice) {
+    public void setSalePrice(int salePrice) {
         this.salePrice = salePrice;
     }
 
@@ -97,11 +96,11 @@ public class Product {
         this.image = image;
     }
 
-    public Category getCategoryId() {
+    public Category getCategory() {
         return this.category;
     }
 
-    public void setCategoryId(Category category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
@@ -113,4 +112,7 @@ public class Product {
         this.createdAt = createdAt;
     }
 
+    public Category getGetCategory() {
+        return this.category;
+    }
 }

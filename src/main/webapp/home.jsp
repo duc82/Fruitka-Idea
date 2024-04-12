@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <t:home_layout title="Home">
   <jsp:body>
     <!-- hero area -->
@@ -84,48 +85,46 @@
         </div>
 
         <div class="row">
-          <div class="col-lg-4 col-md-6 text-center">
-            <div class="single-product-item">
-              <div class="product-image">
-                <a href="single-product.html"><img
-                    src="assets/img/products/product-img-1.jpg" alt=""></a>
+            <%--@elvariable id="products" type="java.util.List<com.example.fruitka.entity.Product>"--%>
+          <c:forEach
+              items="${products}"
+              var="product">
+            <div class="col-lg-4 col-md-6 text-center">
+              <div class="single-product-item">
+                <div class="product-image">
+                  <a href="${pageContext.request.contextPath}/shop/${product.id}"><img
+                      src="${product.image}"
+                      alt="${product.name}"></a>
+                </div>
+                <h3>${product.name}</h3>
+                <p class="product-price">
+                  <span>Per Kg</span> ${product.salePrice}$ </p>
+                <c:choose>
+                  <c:when test="${product.quantity eq 0}">
+                    <p class="product-status">Out of Stock</p>
+                  </c:when>
+                  <c:otherwise>
+                    <p class="product-status">In Stock</p>
+                  </c:otherwise>
+                </c:choose>
+
+                <c:choose>
+                  <c:when test="${sessionScope.user != null}">
+                    <a
+                        data-product_id="${product.id}"
+                        data-quantity="1"
+                        data-action="add"
+                        class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                  </c:when>
+                  <c:otherwise>
+                    <a
+                        href="${pageContext.request.contextPath}/login"
+                        class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                  </c:otherwise>
+                </c:choose>
               </div>
-              <h3>Strawberry</h3>
-              <p class="product-price">
-                <span>Per Kg</span> 85$
-              </p>
-              <a href="cart.html" class="cart-btn"><i
-                  class="fas fa-shopping-cart"></i> Add to Cart</a>
             </div>
-          </div>
-          <div class="col-lg-4 col-md-6 text-center">
-            <div class="single-product-item">
-              <div class="product-image">
-                <a href="single-product.html"><img
-                    src="assets/img/products/product-img-2.jpg" alt=""></a>
-              </div>
-              <h3>Berry</h3>
-              <p class="product-price">
-                <span>Per Kg</span> 70$
-              </p>
-              <a href="cart.html" class="cart-btn"><i
-                  class="fas fa-shopping-cart"></i> Add to Cart</a>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
-            <div class="single-product-item">
-              <div class="product-image">
-                <a href="single-product.html"><img
-                    src="assets/img/products/product-img-3.jpg" alt=""></a>
-              </div>
-              <h3>Lemon</h3>
-              <p class="product-price">
-                <span>Per Kg</span> 35$
-              </p>
-              <a href="cart.html" class="cart-btn"><i
-                  class="fas fa-shopping-cart"></i> Add to Cart</a>
-            </div>
-          </div>
+          </c:forEach>
         </div>
       </div>
     </div>

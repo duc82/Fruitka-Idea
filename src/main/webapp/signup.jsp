@@ -8,7 +8,8 @@
         Sign Up
       </h2>
 
-      <jsp:useBean id="error" scope="request" type="java.lang.String"/>
+
+        <%--@elvariable id="error" type="java.lang.String"--%>
       <c:if test="${not empty error}">
         <div
             class="alert alert-danger"
@@ -19,7 +20,7 @@
 
       <form
           method="post"
-          action="${pageContext.request.contextPath}/sign-up">
+          action="${pageContext.request.contextPath}/signup">
         <div class="mb-3">
           <label
               for="nameSignup"

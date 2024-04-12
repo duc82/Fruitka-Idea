@@ -1,9 +1,5 @@
-<%@ page import="com.example.fruitka.entity.User" %>
-<%@ taglib prefix="c" uri="" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
-<%
-  User user = (User) session.getAttribute("user");
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%-- header --%>
 <div
     class="top-header-area"
@@ -24,7 +20,7 @@
           <!-- menu start -->
           <nav class="main-menu">
             <ul>
-              <li class="current-list-item"><a href="#">Home</a></li>
+              <li><a href="${pageContext.request.contextPath}/">Home</a></li>
               <li><a href="${pageContext.request.contextPath}/about">About</a></li>
               <li><a href="${pageContext.request.contextPath}/shop">Shop</a>
               </li>
@@ -39,18 +35,18 @@
                       class="fas fa-shopping-cart"></i></a> <a
                     class="mobile-hide search-bar-icon"
                     href="#"><i class="fas fa-search"></i></a>
-                  <c:if test="${not empty user}">
-                    <a
-                        class="account-icon"
-                        href="${pageContext.request.contextPath}/account"><i
-                        class="fas fa-user"></i></a>
-                  </c:if>
-                  <c:if test="${empty user}">
-                    <a
-                        class="login-icon"
-                        href="${pageContext.request.contextPath}/login"><i
-                        class="fas fa-sign-in-alt"></i></a>
-                  </c:if>
+                  <c:choose>
+                    <c:when test="${sessionScope.user != null}">
+                      <a class="account-icon" href="${pageContext.request.contextPath}/account">
+                        <i class="fas fa-user"></i>
+                      </a>
+                    </c:when>
+                    <c:otherwise>
+                      <a class="login-icon" href="${pageContext.request.contextPath}/login">
+                        <i class="fas fa-sign-in-alt"></i>
+                      </a>
+                    </c:otherwise>
+                  </c:choose>
                 </div>
               </li>
             </ul>

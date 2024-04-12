@@ -7,13 +7,14 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-@WebServlet(name = "account", value = "/account")
-public class AccountServlet extends HttpServlet {
-    private static final Logger logger = Logger.getLogger(AccountServlet.class.getName());
+@WebServlet(name = "logout", value = "/logout")
+public class LogoutServlet extends HttpServlet {
+    private static final Logger logger = Logger.getLogger(LogoutServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/account.jsp").forward(request, response);
+        request.getSession().invalidate();
+        response.sendRedirect(request.getContextPath() + "/login");
     }
 
     @Override
