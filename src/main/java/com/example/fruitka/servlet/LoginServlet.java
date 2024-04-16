@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 @WebServlet(name = "login", value = "/login")
 public class LoginServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(LoginServlet.class.getName());
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/login.jsp").forward(request, response);
@@ -34,13 +35,13 @@ public class LoginServlet extends HttpServlet {
                 throw new ServletException("Email and password are required");
             }
 
-            User user = UserUtils.getUserByEmail(conn,email);
+            User user = UserUtils.getUserByEmail(conn, email);
 
             if (user == null) {
                 throw new ServletException("User does not exist");
             }
 
-            if (!AuthUtils.verifyPassword(password,user.getPassword())) {
+            if (!AuthUtils.verifyPassword(password, user.getPassword())) {
                 throw new ServletException("Wrong password");
             }
 
@@ -50,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 
             conn.close();
         } catch (Exception e) {
-            logger.log(Level.SEVERE,e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage());
             request.setAttribute("error", e.getMessage());
             doGet(request, response);
         }

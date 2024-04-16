@@ -1,5 +1,6 @@
 package com.example.fruitka.entity;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.example.fruitka.enums.Role;
 import java.sql.Date;
 
@@ -83,5 +84,7 @@ public class User {
         this.createdAt = createdAt;
     }
 
-
+    public String hashPassword(String password) {
+        return BCrypt.withDefaults().hashToString(12, password.toCharArray());
+    }
 }

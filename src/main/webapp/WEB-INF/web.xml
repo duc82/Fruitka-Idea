@@ -8,4 +8,14 @@
         <servlet-name>default</servlet-name>
         <url-pattern>/assets/*</url-pattern>
     </servlet-mapping>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/not-found</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>jakarta.servlet.ServletException</exception-type>
+        <location>/not-found</location>
+    </error-page>
 </web-app>

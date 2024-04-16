@@ -43,13 +43,49 @@ public class ProductUtils {
         return list;
     }
 
-    public static List<Product> getRelatedProducts(Connection conn,int id) throws SQLException {
+    public static void create(Connection conn, Product product, int categoryId) throws SQLException {
+        String sql = "INSERT INTO Products(name, slug, price, sale_price, quantity, description, image, product_category_id) VALUES(?,?,?,?,?,?,?,?)";
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, product.getName());
+        pstm.setString(2, product.getSlug());
+        pstm.setInt(3, product.getPrice());
+        pstm.setInt(4, product.getSalePrice());
+        pstm.setInt(5, product.getQuantity());
+        pstm.setString(6, product.getDescription());
+        pstm.setString(7, product.getImage());
+        pstm.setInt(8, categoryId);
+        pstm.executeUpdate();
+    }
+
+    public static void update(Connection conn, Product product, int categoryId) throws SQLException {
+        String sql = "UPDATE Products SET name = ?, slug = ?, price = ?, sale_price = ?, quantity = ?, description = ?, image = ?, product_category_id = ? WHERE id = ?";
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, product.getName());
+        pstm.setString(2, product.getSlug());
+        pstm.setInt(3, product.getPrice());
+        pstm.setInt(4, product.getSalePrice());
+        pstm.setInt(5, product.getQuantity());
+        pstm.setString(6, product.getDescription());
+        pstm.setString(7, product.getImage());
+        pstm.setInt(8, categoryId);
+        pstm.setInt(9, product.getId());
+        pstm.executeUpdate();
+    }
+
+    public static void delete(Connection conn, int id) throws SQLException {
+        String sql = "DELETE FROM Products WHERE id = ?";
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setInt(1, id);
+        pstm.executeUpdate();
+    }
+
+    public static List<Product> getRelatedProducts(Connection conn, int id) throws SQLException {
         String sql = "SELECT * FROM Products WHERE NOT id = ?";
         PreparedStatement pstm = conn.prepareStatement(sql);
-        pstm.setInt(1,id);
+        pstm.setInt(1, id);
         ResultSet rs = pstm.executeQuery();
         List<Product> list = new ArrayList<>();
-        while(rs.next()) {
+        while (rs.next()) {
             int productId = rs.getInt("id");
             String name = rs.getString("name");
             String slug = rs.getString("slug");
@@ -68,7 +104,7 @@ public class ProductUtils {
     }
 
 
-    public static Product getById(Connection conn,int id) throws SQLException {
+    public static Product getById(Connection conn, int id) throws SQLException {
         String sql = "SELECT * FROM Products WHERE id = ?";
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setInt(1, id);

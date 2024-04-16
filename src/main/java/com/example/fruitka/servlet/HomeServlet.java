@@ -12,7 +12,7 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.logging.Logger;
 
-@WebServlet(value = "/")
+@WebServlet("/")
 public class HomeServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(HomeServlet.class.getName());
     @Override

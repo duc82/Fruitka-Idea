@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-<t:root_layout title="Not Found">
+<t:home_layout title="Not Found">
   <jsp:body>
     <!-- breadcrumb-section -->
     <div class="breadcrumb-section breadcrumb-bg">
@@ -27,7 +27,7 @@
                 <i class="far fa-sad-cry"></i>
                 <h1>Oops! Not Found.</h1>
                 <p>The page you requested for is not found.</p>
-                <a href="index.html" class="boxed-btn">Back to Home</a>
+                <a href="${pageContext.request.contextPath}/" class="boxed-btn">Back to Home</a>
               </div>
             </div>
           </div>
@@ -36,4 +36,4 @@
     </div>
     <!-- end error section -->
   </jsp:body>
-</t:root_layout>
+</t:home_layout>

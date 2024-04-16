@@ -29,7 +29,6 @@ public class SignUpServlet extends HttpServlet {
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
             String password = request.getParameter("password");
-            String hashedPassword = AuthUtils.hashPassword(password);
 
             if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty()) {
                 throw new Exception("Invalid input");
@@ -49,7 +48,7 @@ public class SignUpServlet extends HttpServlet {
             user.setName(name);
             user.setEmail(email);
             user.setPhone(phone);
-            user.setPassword(hashedPassword);
+            user.setPassword(user.hashPassword(password));
 
             AuthUtils.signUp(conn,user);
 

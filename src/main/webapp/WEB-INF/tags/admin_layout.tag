@@ -24,9 +24,8 @@
         rel="stylesheet"
         href="${pageContext.request.contextPath}/assets/css/all.min.css"/>
     <!-- bootstrap -->
-    <link
-        rel="stylesheet"
-        href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    />
     <!-- owl carousel -->
     <link
         rel="stylesheet"
@@ -51,6 +50,9 @@
     <link
         rel="stylesheet"
         href="${pageContext.request.contextPath}/assets/css/responsive.css"/>
+
+    <%--    adminlte--%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/adminlte.min.css"/>
   </head>
   <body>
     <!--PreLoader-->
@@ -60,66 +62,93 @@
       </div>
     </div>
 
-    <div class="position-fixed start-0 h-100 d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
-      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-        <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-        <span class="fs-4">Sidebar</span>
-      </a>
-      <hr>
-      <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
-          <a href="#" class="nav-link active" aria-current="page">
-            <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-            Home
-          </a>
-        </li>
-        <li>
-          <a href="#" class="nav-link link-body-emphasis">
-            <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-            Dashboard
-          </a>
-        </li>
-        <li>
-          <a href="#" class="nav-link link-body-emphasis">
-            <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-            Orders
-          </a>
-        </li>
-        <li>
-          <a href="#" class="nav-link link-body-emphasis">
-            <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-            Products
-          </a>
-        </li>
-        <li>
-          <a href="#" class="nav-link link-body-emphasis">
-            <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-            Customers
-          </a>
-        </li>
-      </ul>
-      <hr>
-      <div class="dropdown">
-        <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-          <strong>mdo</strong>
+    <div class="d-flex h-100 flex-nowrap">
+      <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+        <a href="${pageContext.request.contextPath}/admin"
+           class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+          <img src="${pageContext.request.contextPath}/assets/img/logo.png" alt="Logo" class="mr-2" style="width: 100px;">
+          <span class="fs-4">Logo</span>
         </a>
-        <ul class="dropdown-menu text-small shadow">
-          <li><a class="dropdown-item" href="#">New project...</a></li>
-          <li><a class="dropdown-item" href="#">Settings</a></li>
-          <li><a class="dropdown-item" href="#">Profile</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="#">Sign out</a></li>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto" id="admin-menu">
+          <li class="nav-item">
+            <a href="${pageContext.request.contextPath}/admin" class="nav-link" aria-current="page">
+              <i class="fa fa-home"></i>
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a href="${pageContext.request.contextPath}/users" class="nav-link link-body-emphasis">
+              <i class="fa fa-users"></i>
+              Users
+            </a>
+          </li>
+          <li>
+            <a href="${pageContext.request.contextPath}/products" class="nav-link link-body-emphasis">
+              <i class="fa fa-shopping-cart"></i>
+              Products
+            </a>
+          </li>
+          <li>
+            <a href="${pageContext.request.contextPath}/categories" class="nav-link link-body-emphasis">
+              <i class="fa fa-th-list"></i>
+              Categories
+            </a>
+          </li>
+          <li>
+            <a href="${pageContext.request.contextPath}/orders" class="nav-link link-body-emphasis">
+              <i class="fa fa-tasks"></i>
+              Orders
+            </a>
+          </li>
+          <li>
+            <a href="${pageContext.request.contextPath}/news" class="nav-link link-body-emphasis">
+              <i class="fa fa-newspaper"></i>
+              News
+            </a>
+          </li>
         </ul>
+        <hr>
+        <div class="dropdown">
+          <a class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
+             role="button"
+             data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://github.com/mdo.png" alt="avatar" width="32" height="32" class="rounded-circle me-2">
+            <strong>${sessionScope.user.name}</strong>
+          </a>
+          <ul class="dropdown-menu text-small shadow">
+            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/account">Profile</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Sign out</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="w-100 p-3">
+        <div class="content-header">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0"><%=title%></h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right float-end">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active"><%=title%></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <jsp:doBody/>
       </div>
     </div>
 
-    <jsp:doBody/>
 
     <!-- jquery -->
     <script src="${pageContext.request.contextPath}/assets/js/jquery-1.11.3.min.js"></script>
     <!-- bootstrap -->
-    <script src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    ></script>
     <!-- count down -->
     <script src="${pageContext.request.contextPath}/assets/js/jquery.countdown.js"></script>
     <!-- isotope -->

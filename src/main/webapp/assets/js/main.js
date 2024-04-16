@@ -157,6 +157,13 @@
             }
         });
 
+        // admin menu
+        $("#admin-menu .nav-link").each(function (i, item) {
+            if (item.getAttribute("href") === pathname) {
+                $(item).addClass("active");
+            }
+        })
+
         // add to cart
         $(".cart-btn").click(function () {
             const productId = +$(this).data("product_id");
